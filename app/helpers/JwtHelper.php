@@ -6,12 +6,12 @@ use Illuminate\Validation\UnauthorizedException;
 
 if (!function_exists('jwt_build_token')) {
     /**
-     * Genera un token
+     * Generate token
      *
      * @param array $data
      * @return string
      */
-    function jwt_build_token($data)
+    function jwt_build_token($data): string
     {
         $token = [
             "iss" => ENV('JWT_ISS'),
@@ -26,12 +26,12 @@ if (!function_exists('jwt_build_token')) {
 
 if (!function_exists('jwt_decode_token')) {
     /**
-     * Decodifica un token
+     * Decode token
      *
      * @param string $token
-     * @return string
+     * @return object
      */
-    function jwt_decode_token($token)
+    function jwt_decode_token($token): object
     {
         try {
             return JWT::decode($token, ENV('JWT_SECRET'), ['HS256']);
