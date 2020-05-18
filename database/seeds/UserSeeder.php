@@ -5,6 +5,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 
+use App\Models\User;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -31,12 +33,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $this->userRepository->create([
-            'first_name' => 'User',
-            'last_name' => 'Admin',
-            'email' => 'admin@laravelrestapi.com',
-            'password' => Hash::make('PasswordAdmin1234'),
-            'email_verified_at' => Carbon::now()->toDate()
-        ]);
+        $user = User::whereEmail('admin@laravelrestapi.com')->first();
+
+        if (! $user) {
+            User::create([
+                'first_name' => 'User',
+                'last_name' => 'Admin',
+                'email' => 'admin@laravelrestapi.com',
+                'password' => Hash::make('PasswordAdmin1234'),
+                'email_verified_at' => Carbon::now()->toDate()
+            ]);
+        }
     }
 }
