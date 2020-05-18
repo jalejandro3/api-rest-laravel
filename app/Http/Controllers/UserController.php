@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InputValidationException;
+use App\Exceptions\ApplicationException;
+use App\Exceptions\ResourceNotFoundException;
 use App\Services\AuthServiceInterface;
 use App\Services\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
@@ -42,6 +44,8 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws InputValidationException
+     * @throws ApplicationException
+     * @throws ResourceNotFoundException
      */
     public function login(Request $request): JsonResponse
     {
@@ -56,6 +60,6 @@ class UserController extends Controller
             throw new InputValidationException($validator->getMessageBag());
         }
 
-        return $this->success($this->authService->login($request->get('email'), $request->get('password')));
+        return $this->authSuccess($this->authService->login($request->get('email'), $request->get('password')));
     }
 }
