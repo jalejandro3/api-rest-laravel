@@ -5,11 +5,10 @@ namespace App\Services;
 interface UserServiceInterface
 {
     /**
-     * Method to login a user
+     * Return User Data by JWT string
      *
-     * @param string $user
-     * @param string $password
-     * @return mixed
+     * @param string $jwt
+     * @return array
      */
-    public function login(string $user, string $password);
+    public function getUserData(string $jwt): array;
 }
