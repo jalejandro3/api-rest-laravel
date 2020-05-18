@@ -22,4 +22,17 @@ class Controller extends BaseController
     {
         return response()->json(['data' => $data]);
     }
+
+    /**
+     * Auth success body
+     *
+     * @param string $data
+     * @return JsonResponse
+     */
+    public function authSuccess($data): JsonResponse
+    {
+        return response()->json([
+            'token' => $data
+        ]);
+    }
 }
