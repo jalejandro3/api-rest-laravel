@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\User;
+
 interface UserRepositoryInterface
 {
     /**
@@ -11,4 +13,12 @@ interface UserRepositoryInterface
      * @return bool
      */
     public function create(array $data): bool;
+
+    /**
+     * Find a user by email
+     *
+     * @param string $email
+     * @return User|null
+     */
+    public function findByEmail(string $email): ?User;
 }

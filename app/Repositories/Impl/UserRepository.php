@@ -31,4 +31,12 @@ class UserRepository implements UserRepositoryInterface
     {
         return $this->user->save($data);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function findByEmail(string $email): ?User
+    {
+        return $this->user->whereEmail($email)->first();
+    }
 }
