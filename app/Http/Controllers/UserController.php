@@ -62,4 +62,15 @@ class UserController extends Controller
 
         return $this->authSuccess($this->authService->login($request->get('email'), $request->get('password')));
     }
+
+    /**
+     * Return User Data by Bearer Token
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserData(Request $request): JsonResponse
+    {
+        return $this->success($this->userService->getUserData($request->bearerToken()));
+    }
 }

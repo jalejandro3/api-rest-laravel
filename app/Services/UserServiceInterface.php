@@ -8,7 +8,7 @@ interface UserServiceInterface
      * Return User Data by JWT string
      *
      * @param string $jwt
-     * @return array
+     * @return object
      */
-    public function getUserData(string $jwt): array;
+    public function getUserData(string $jwt): object;
 }

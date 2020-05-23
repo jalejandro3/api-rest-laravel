@@ -9,8 +9,10 @@ class UserService implements UserServiceInterface
     /**
      * @inheritDoc
      */
-    public function getUserData(string $jwt): array
+    public function getUserData(string $jwt): object
     {
-        return (array)jwt_decode_token($jwt);
+        $user = jwt_decode_token($jwt);
+
+        return $user->data;
     }
 }
