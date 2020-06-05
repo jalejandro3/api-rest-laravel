@@ -4,24 +4,24 @@ namespace App\Services\Impl;
 
 use App\Exceptions\ApplicationException;
 use App\Exceptions\ResourceNotFoundException;
-use App\Repositories\UserRepositoryInterface;
-use App\Services\AuthServiceInterface;
+use App\Repositories\UserRepository;
+use App\Services\AuthService as AuthServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService implements AuthServiceInterface
 {
     /**
-     * @var UserRepositoryInterface
+     * @var UserRepository
      */
     private $userRepository;
 
     /**
      * AuthService constructor.
      *
-     * @param UserRepositoryInterface $userRepository
+     * @param UserRepository $userRepository
      */
     public function __construct(
-        UserRepositoryInterface $userRepository
+        UserRepository $userRepository
     )
     {
         $this->userRepository = $userRepository;

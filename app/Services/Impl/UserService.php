@@ -2,7 +2,7 @@
 
 namespace App\Services\Impl;
 
-use App\Services\UserServiceInterface;
+use App\Services\UserService as UserServiceInterface;
 
 class UserService implements UserServiceInterface
 {

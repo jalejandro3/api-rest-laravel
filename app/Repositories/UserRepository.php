@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 
-interface UserRepositoryInterface
+interface UserRepository
 {
     /**
      * Method to store a user

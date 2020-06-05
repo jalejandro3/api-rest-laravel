@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-interface UserServiceInterface
+interface UserService
 {
     /**
      * Return User Data by JWT string

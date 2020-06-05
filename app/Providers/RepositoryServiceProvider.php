@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\UserRepositoryInterface;
+use App\Repositories\UserRepository as UserRepositoryInterface;
 use App\Repositories\Impl\UserRepository;
 
 class RepositoryServiceProvider extends ServiceProvider

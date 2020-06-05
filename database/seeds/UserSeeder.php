@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\UserRepositoryInterface;
+use App\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
@@ -10,17 +10,17 @@ use App\Models\User;
 class UserSeeder extends Seeder
 {
     /**
-     * @var UserRepositoryInterface
+     * @var UserRepository
      */
     private $userRepository;
 
     /**
      * UserSeeder constructor.
      *
-     * @param UserRepositoryInterface $userRepository
+     * @param UserRepository $userRepository
      */
     public function __construct(
-        UserRepositoryInterface $userRepository
+        UserRepository $userRepository
     )
     {
         $this->userRepository = $userRepository;

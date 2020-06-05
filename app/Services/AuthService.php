@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Exceptions\ApplicationException;
 use App\Exceptions\ResourceNotFoundException;
 
-interface AuthServiceInterface
+interface AuthService
 {
     /**
      * Method to login a user

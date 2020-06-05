@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', ['uses' => 'UserController@login']);
-Route::get('users', ['uses' => 'UserController@getUserData']);
+Route::post('auth/login', ['uses' => 'AuthController@login']);
+Route::get('me', ['uses' => 'UserController@getUserData']);
