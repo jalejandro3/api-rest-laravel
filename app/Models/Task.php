@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Task extends Model
 {
-    use Notifiable, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'tasks';
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password'
+        'user_id', 'priority_id', 'status_id', 'description'
     ];
 
     /**
@@ -32,9 +30,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token', 'deleted_at', 'email_verified_at'
-    ];
+    protected $hidden = ['deleted_at'];
 
     /**
      * The attributes that should be cast to native types.
@@ -42,14 +38,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime'
     ];
 
-    public function tasks()
+    public function user()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasOne(User::class);
+    }
+
+    public function priority()
+    {
+        return $this->hasOne(Priority::class);
+    }
+
+    public function status()
+    {
+        return $this->hasOne(Status::class);
     }
 }

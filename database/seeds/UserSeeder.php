@@ -10,23 +10,6 @@ use App\Models\User;
 class UserSeeder extends Seeder
 {
     /**
-     * @var UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * UserSeeder constructor.
-     *
-     * @param UserRepository $userRepository
-     */
-    public function __construct(
-        UserRepository $userRepository
-    )
-    {
-        $this->userRepository = $userRepository;
-    }
-
-    /**
      * Run the database seeds.
      *
      * @return void

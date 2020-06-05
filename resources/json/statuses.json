@@ -1,0 +1,19 @@
+{
+    "statuses": [
+        {
+            "name": "Pending"
+        },
+        {
+            "name": "Working"
+        },
+        {
+            "name": "Stopped"
+        },
+        {
+            "name": "Waiting"
+        },
+        {
+            "name": "Done"
+        }
+    ]
+}

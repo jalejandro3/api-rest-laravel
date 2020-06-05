@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories\Impl;
 
 use App\Models\User;
 use App\Repositories\UserRepository as UserRepositoryInterface;
 
-class UserRepository implements UserRepositoryInterface
+final class UserRepository implements UserRepositoryInterface
 {
     /**
      * @var User

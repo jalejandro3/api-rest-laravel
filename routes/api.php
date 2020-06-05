@@ -14,5 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * AUTH
+ */
 Route::post('auth/login', ['uses' => 'AuthController@login']);
+
+/**
+ * USER
+ */
 Route::get('me', ['uses' => 'UserController@getUserData']);
+
+/**
+ * TASKS
+ */
+Route::get('tasks', ['uses' => 'TaskController@all']);
+Route::post('tasks', ['uses' => 'TaskController@createTask']);
+Route::get('tasks/user', ['uses' => 'TaskController@getTasksByUser']);
+Route::get('tasks/{id}', ['uses' => 'TaskController@getTaskById']);
