@@ -43,7 +43,7 @@ final class TaskRepository implements TaskRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getAll(): Collection
+    public function findAll(): Collection
     {
         return $this->task->all();
     }

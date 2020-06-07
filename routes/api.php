@@ -35,4 +35,6 @@ Route::get('tasks/{id}', ['uses' => 'TaskController@getTaskById']);
 /**
  * TASK TRANSACTIONS
  */
+Route::get('task/transactions', ['uses' => 'TaskTransactionController@all']);
 Route::post('task/transactions/approve', ['uses' => 'TaskTransactionController@approveTask']);
+Route::post('task/transactions/decline', ['uses' => 'TaskTransactionController@declineTask']);

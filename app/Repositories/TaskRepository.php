@@ -42,7 +42,7 @@ interface TaskRepository
      *
      * @return Collection
      */
-    public function getAll(): Collection;
+    public function findAll(): Collection;
 
     /**
      * Get all user's tasks

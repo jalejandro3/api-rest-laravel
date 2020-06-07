@@ -30,7 +30,7 @@ interface TaskService
      *
      * @return Collection
      */
-    public function getAllTasks(): Collection;
+    public function getAll(): Collection;
 
     /**
      * Return Task data by id

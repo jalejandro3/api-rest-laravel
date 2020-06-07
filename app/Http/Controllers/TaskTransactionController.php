@@ -28,6 +28,18 @@ class TaskTransactionController extends Controller
     }
 
     /**
+     * Get all task transactions
+     *
+     * @return JsonResponse
+     */
+    public function all(): JsonResponse
+    {
+        return $this->success($this->taskTransactionService->getAll());
+    }
+
+    /**
+     * Approve a task transaction
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws InputValidationException
@@ -47,6 +59,32 @@ class TaskTransactionController extends Controller
         }
 
         return $this->success($this->taskTransactionService->approve(
+            $request->get('task_id'), $request->bearerToken())
+        );
+    }
+
+    /**
+     * Decline a task transaction
+     *
+     * @param Request $request
+     * @return JsonResponse
+     * @throws InputValidationException
+     * @throws ApplicationException
+     * @throws ResourceNotFoundException
+     */
+    public function declineTask(Request $request): JsonResponse
+    {
+        $rules = [
+            'task_id' => 'required|integer'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()){
+            throw new InputValidationException($validator->messages()->all());
+        }
+
+        return $this->success($this->taskTransactionService->decline(
             $request->get('task_id'), $request->bearerToken())
         );
     }

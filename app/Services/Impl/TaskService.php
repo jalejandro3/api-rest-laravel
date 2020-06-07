@@ -70,9 +70,9 @@ final class TaskService implements TaskServiceInterface
     /**
      * @inheritDoc
      */
-    public function getAllTasks(): Collection
+    public function getAll(): Collection
     {
-        return $this->taskRepository->getAll();
+        return $this->taskRepository->findAll();
     }
 
     /**

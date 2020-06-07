@@ -7,9 +7,17 @@ namespace App\Services;
 use App\Exceptions\ApplicationException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\TaskTransaction;
+use Illuminate\Database\Eloquent\Collection;
 
 interface TaskTransactionService
 {
+    /**
+     * Return all task transactions
+     *
+     * @return Collection
+     */
+    public function getAll(): Collection;
+
     /**
      * Approve a task transaction
      *
@@ -25,10 +33,10 @@ interface TaskTransactionService
      * Decline a task transaction
      *
      * @param int $taskId
-     * @param int $userId
+     * @param string $token
      * @return TaskTransaction
      * @throws ResourceNotFoundException
      * @throws ApplicationException
      */
-    public function decline(int $taskId, int $userId): TaskTransaction;
+    public function decline(int $taskId, string $token): TaskTransaction;
 }

@@ -6,22 +6,31 @@ namespace App\Repositories\Impl;
 
 use App\Models\TaskTransaction;
 use App\Repositories\TaskTransactionRepository as TaskApprovalTransactionRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 final class TaskTransactionRepository implements TaskApprovalTransactionRepositoryInterface
 {
     /**
      * @var TaskTransaction
      */
-    private $taskApprovalTransaction;
+    private $taskTransaction;
 
     /**
      * TaskTransactionRepository constructor.
      *
-     * @param TaskTransaction $taskApprovalTransaction
+     * @param TaskTransaction $taskTransaction
      */
-    public function __construct(TaskTransaction $taskApprovalTransaction)
+    public function __construct(TaskTransaction $taskTransaction)
     {
-        $this->taskApprovalTransaction = $taskApprovalTransaction;
+        $this->taskTransaction = $taskTransaction;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findAll(): Collection
+    {
+        return $this->taskTransaction->all();
     }
 
     /**
@@ -29,7 +38,7 @@ final class TaskTransactionRepository implements TaskApprovalTransactionReposito
      */
     public function create(array $data): TaskTransaction
     {
-        return $this->taskApprovalTransaction->create($data);
+        return $this->taskTransaction->create($data);
     }
 
     /**
@@ -37,7 +46,7 @@ final class TaskTransactionRepository implements TaskApprovalTransactionReposito
      */
     public function update(int $id, array $data): int
     {
-        return $this->taskApprovalTransaction->whereId($id)->update($data);
+        return $this->taskTransaction->whereId($id)->update($data);
     }
 
     /**
@@ -45,6 +54,6 @@ final class TaskTransactionRepository implements TaskApprovalTransactionReposito
      */
     public function findByTaskId(int $id): ?TaskTransaction
     {
-        return $this->taskApprovalTransaction->whereTaskId($id)->first();
+        return $this->taskTransaction->whereTaskId($id)->first();
     }
 }

@@ -33,7 +33,7 @@ class TaskController extends Controller
      */
     public function all(): JsonResponse
     {
-        return $this->success($this->taskService->getAllTasks());
+        return $this->success($this->taskService->getAll());
     }
 
     /**

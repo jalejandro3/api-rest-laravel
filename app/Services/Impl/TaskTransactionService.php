@@ -11,6 +11,7 @@ use App\Repositories\TaskRepository;
 use App\Repositories\TaskTransactionRepository;
 use App\Services\TaskTransactionService as TaskApprovalTransactionServiceInterface;
 use DB;
+use Illuminate\Database\Eloquent\Collection;
 
 final class TaskTransactionService implements TaskApprovalTransactionServiceInterface
 {
@@ -39,6 +40,11 @@ final class TaskTransactionService implements TaskApprovalTransactionServiceInte
         $this->taskTransactionRepository = $taskTransactionRepository;
     }
 
+    public function getAll(): Collection
+    {
+        return $this->taskTransactionRepository->findAll();
+    }
+
     /**
      * @inheritDoc
      */
@@ -65,19 +71,32 @@ final class TaskTransactionService implements TaskApprovalTransactionServiceInte
         });
     }
 
-    public function decline(int $taskId, int $userId): TaskTransaction
+    /**
+     * @inheritDoc
+     */
+    public function decline(int $taskId, string $token): TaskTransaction
     {
         $this->checkTaskTransactionExists($taskId);
 
         $this->checkTaskTransactionIsPending($taskId);
 
-        $taskTransaction = $this->taskTransactionRepository->findByTaskId($taskId);
+        return DB::transaction(function() use($taskId, $token) {
+            $user = jwt_decode_token($token)->data;
+            $taskTransaction = $this->taskTransactionRepository->findByTaskId($taskId);
 
-        $this->taskTransactionRepository->update($taskTransaction->id, [
-            'status_id' => 3
-        ]);
+            if ($taskTransaction->task->is_approved) {
+                $this->taskRepository->update($taskTransaction->task->id, [
+                    'is_approved' => false
+                ]);
+            }
 
-        return $taskTransaction->refresh();
+            $this->taskTransactionRepository->update($taskTransaction->id, [
+                'status_id' => 3,
+                'user_id' => $user->id
+            ]);
+
+            return $taskTransaction->refresh();
+        });
     }
 
     /**
@@ -87,7 +106,7 @@ final class TaskTransactionService implements TaskApprovalTransactionServiceInte
     private function checkTaskTransactionExists(int $taskId)
     {
         if (! $this->taskTransactionRepository->findByTaskId($taskId)) {
-            throw new ResourceNotFoundException("Task transaction with task id {$taskId} does not exists.");
+            throw new ResourceNotFoundException("Task transaction does not exists.");
         }
     }
 
@@ -98,7 +117,7 @@ final class TaskTransactionService implements TaskApprovalTransactionServiceInte
     private function checkTaskTransactionIsPending(int $taskId)
     {
         if ($this->taskTransactionRepository->findByTaskId($taskId)->status_id !== 1) {
-            throw new ApplicationException("There is not task with id {$taskId} pending for approbation.");
+            throw new ApplicationException("There is not task pending for approbation.");
         }
     }
 }
