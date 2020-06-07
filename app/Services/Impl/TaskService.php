@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Services\Impl;
 
-use App\Exceptions\ApplicationException;
 use App\Exceptions\ResourceNotFoundException;
 use App\Models\Task;
+use App\Repositories\TaskTransactionRepository;
 use App\Repositories\TaskRepository;
 use App\Services\TaskService as TaskServiceInterface;
+use DB;
 use Illuminate\Database\Eloquent\Collection;
 
 final class TaskService implements TaskServiceInterface
@@ -19,30 +20,41 @@ final class TaskService implements TaskServiceInterface
     private $taskRepository;
 
     /**
+     * @var TaskTransactionService
+     */
+    private $taskApprovalTransactionRepository;
+
+    /**
      * TaskService constructor.
      *
      * @param TaskRepository $taskRepository
+     * @param TaskTransactionRepository $taskApprovalTransactionRepository
      */
-    public function __construct(TaskRepository $taskRepository)
+    public function __construct(
+        TaskRepository $taskRepository,
+        TaskTransactionRepository $taskApprovalTransactionRepository
+    )
     {
         $this->taskRepository = $taskRepository;
+        $this->taskApprovalTransactionRepository = $taskApprovalTransactionRepository;
     }
 
     /**
      * @inheritDoc
      */
-    public function create(int $userId, int $priorityId, int $statusId, string $description): Task
+    public function create(array $data): Task
     {
-        try {
-            return $this->taskRepository->create([
-               'user_id' => $userId,
-               'priority_id' => $priorityId,
-               'status_id' => $statusId,
-               'description' => $description
+        return DB::transaction(function() use($data) {
+
+            $task = $this->taskRepository->create($data);
+
+            $this->taskApprovalTransactionRepository->create([
+                'user_id' => 1,
+                'task_id' => $task->id
             ]);
-        } catch (\Exception $e) {
-            throw new ApplicationException('There was an error creating the task.');
-        }
+
+            return $task;
+        });
     }
 
     /**
@@ -68,10 +80,19 @@ final class TaskService implements TaskServiceInterface
      */
     public function getTask(int $id): Task
     {
-        if (! $task = $this->taskRepository->getTask($id)) {
-            throw new ResourceNotFoundException('Task does not exists.');
-        }
+        $this->checkTaskExists($id);
 
-        return $task;
+        return $this->taskRepository->getTask($id);
+    }
+
+    /**
+     * @param int $id
+     * @throws ResourceNotFoundException
+     */
+    private function checkTaskExists(int $id)
+    {
+        if (! $this->taskRepository->getTask($id)) {
+            throw new ResourceNotFoundException("Task with id {$id} does not exists.");
+        }
     }
 }

@@ -31,3 +31,8 @@ Route::get('tasks', ['uses' => 'TaskController@all']);
 Route::post('tasks', ['uses' => 'TaskController@createTask']);
 Route::get('tasks/user', ['uses' => 'TaskController@getTasksByUser']);
 Route::get('tasks/{id}', ['uses' => 'TaskController@getTaskById']);
+
+/**
+ * TASK TRANSACTIONS
+ */
+Route::post('task/transactions/approve', ['uses' => 'TaskTransactionController@approveTask']);

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Task extends Model
+class TransactionStatus extends Model
 {
     use SoftDeletes;
 
@@ -14,16 +14,14 @@ class Task extends Model
      *
      * @var string
      */
-    protected $table = 'tasks';
+    protected $table = 'transaction_statuses';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id', 'priority_id', 'status_id', 'description'
-    ];
+    protected $fillable = ['name'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,19 +40,4 @@ class Task extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function priority()
-    {
-        return $this->belongsTo(Priority::class);
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
 }

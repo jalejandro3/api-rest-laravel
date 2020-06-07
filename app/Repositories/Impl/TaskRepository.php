@@ -35,6 +35,14 @@ final class TaskRepository implements TaskRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function update(int $id, array $data): int
+    {
+        return $this->task->whereId($id)->update($data);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getAll(): Collection
     {
         return $this->task->all();

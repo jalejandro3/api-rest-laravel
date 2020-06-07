@@ -1,0 +1,13 @@
+{
+    "transaction_statuses": [
+        {
+            "name": "Pending"
+        },
+        {
+            "name": "Approved"
+        },
+        {
+            "name": "Declined"
+        }
+    ]
+}

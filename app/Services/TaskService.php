@@ -14,14 +14,16 @@ interface TaskService
     /**
      * Create a new task
      *
-     * @param int $userId
-     * @param int $priorityId
-     * @param int $statusId
-     * @param string $description
+     * array[]
+     *      ['user_id']     Tash User Id
+     *      ['priority_id'] Task Priority
+     *      ['status_id']   Task status
+     *      ['description'] Task description
+     * @param array $data see above
      * @return Task
      * @throws ApplicationException
      */
-    public function create(int $userId, int $priorityId, int $statusId, string $description): Task;
+    public function create(array $data): Task;
 
     /**
      * Return all tasks

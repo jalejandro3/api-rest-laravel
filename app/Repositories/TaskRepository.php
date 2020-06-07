@@ -12,10 +12,30 @@ interface TaskRepository
     /**
      * Create a new task
      *
-     * @param array $data
-     * @return mixed
+     * array[]
+     *      ['user_id']     Task User Id
+     *      ['priority_id'] Task Priority
+     *      ['status_id']   Task status
+     *      ['description'] Task description
+     *      ['is_approved'] Optional: by default false.
+     * @param array $data see above
+     * @return Task
      */
     public function create(array $data): Task;
+
+    /**
+     * Create a new task
+     *
+     * @param $id
+     * array[]
+     *      ['priority_id'] Optional: Task Priority.
+     *      ['status_id']   Optional: Task status.
+     *      ['description'] Optional: Task description.
+     *      ['is_approved'] Optional: by default false.
+     * @param array $data see above
+     * @return int
+     */
+    public function update(int $id, array $data): int;
 
     /**
      * Get all tasks
