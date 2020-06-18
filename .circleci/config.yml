@@ -17,9 +17,9 @@ jobs:
       # - image: circleci/mysql:5.7-ram
       #
       # - image: redis:2.8.19
-      - image: circleci/mysql:5.7-ram
-        environment:
-          - MYSQL_ROOT_PASSWORD=root
+#      - image: circleci/mysql:5.7-ram
+#        environment:
+#          - MYSQL_ROOT_PASSWORD=root
 
     steps:
       - checkout
