@@ -57,6 +57,8 @@ jobs:
       #prepare laravel env
       - run: cp .env.example .env
       - run: php artisan key:generate
+      - run: php artisan migrate
+      - run: php artisan db:seed
 
       # prepare the database
       #- run: mysqladmin create test --host="127.0.0.1" --user="root" --password="root"
