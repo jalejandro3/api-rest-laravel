@@ -8,7 +8,6 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.2-node-browsers
-        working_directory: ~/laravel
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -54,9 +53,11 @@ jobs:
           paths:
             - node_modules
 
-      #prepare laravel env
+      # prepare Laravel env
       - run: cp .env.example .env
       - run: php artisan key:generate
+
+      # prepare Laravel DB
       - run: php artisan migrate
       - run: php artisan db:seed
 
