@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Auth0\SDK\JWTVerifier;
+use Auth0\SDK\Helpers\Cache\FileSystemCacheHandler;
 use Carbon\Carbon;
 use Firebase\JWT\JWT;
 use Illuminate\Validation\UnauthorizedException;
@@ -36,7 +38,13 @@ if (!function_exists('jwt_decode_token')) {
     function jwt_decode_token(string $token): object
     {
         try {
-            return JWT::decode($token, ENV('JWT_SECRET'), ['HS256']);
+            $verifier = new JWTVerifier([
+                'valid_audiences' => ['http://localhost:8000/api/user/authentication'],
+                'authorized_iss' => ['https://dev-fs5u1uhy.us.auth0.com'],
+                'cache' => new FileSystemCacheHandler()
+            ]);
+
+            return $verifier->verifyAndDecode($token);
         } catch(Exception $e) {
             throw new UnauthorizedException($e->getMessage());
         }
