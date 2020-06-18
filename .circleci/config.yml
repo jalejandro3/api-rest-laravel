@@ -8,6 +8,7 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.2-node-browsers
+      working_directory: ~/laravel
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -53,9 +54,13 @@ jobs:
           paths:
             - node_modules
 
+      #prepare laravel env
+      - run: cp .env.example .env
+      - rum: php artisan key:generate
+
       # prepare the database
-      - run: mysqladmin create test --host="127.0.0.1" --user="root" --password="root"
-      - run: php artisan migrate --env=testing --force
+      #- run: mysqladmin create test --host="127.0.0.1" --user="root" --password="root"
+      #- run: php artisan migrate --env=testing --force
 
       # run tests with phpunit or codecept
       #- run: ./vendor/bin/phpunit
