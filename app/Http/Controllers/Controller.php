@@ -26,13 +26,11 @@ class Controller extends BaseController
     /**
      * Auth success body
      *
-     * @param string $data
+     * @param array $data
      * @return JsonResponse
      */
-    public function authSuccess($data): JsonResponse
+    public function authSuccess(array $data): JsonResponse
     {
-        return response()->json([
-            'token' => $data
-        ]);
+        return response()->json($data);
     }
 }

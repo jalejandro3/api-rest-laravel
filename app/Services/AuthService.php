@@ -12,9 +12,9 @@ interface AuthService
      *
      * @param string $email User email
      * @param string $password User password
-     * @return string
+     * @return array
      * @throws ResourceNotFoundException
      * @throws ApplicationException
      */
-    public function login(string $email, string $password): string;
+    public function login(string $email, string $password): array;
 }

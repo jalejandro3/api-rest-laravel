@@ -30,7 +30,7 @@ class AuthService implements AuthServiceInterface
     /**
      * @inheritDoc
      */
-    public function login(string $email, string $password): string
+    public function login(string $email, string $password): array
     {
         $user = $this->userRepository->findByEmail($email);
 
@@ -42,6 +42,6 @@ class AuthService implements AuthServiceInterface
             throw new ApplicationException('Wrong email or password, please verify your data.');
         }
 
-        return jwt_build_token($user->toArray());
+        return ['token' => jwt_build_token($user->toArray()), 'data' => $user->toArray()];
     }
 }
