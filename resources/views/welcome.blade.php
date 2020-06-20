@@ -9,19 +9,26 @@
     <title>API REST Laravel</title>
 </head>
 <body>
-<section class="container-fluid">
-    <nav class="navbar navbar-light bg-light">
-        <span class="navbar-brand mb-0 h1">API REST Laravel</span>
-    </nav>
-</section>
-<section>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4 text-center">Welcome to API REST Laravel</h1>
-            <p class="lead text-center">You can find a lot of best practices and integration.</p>
+<div class="container">
+    <section>
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">API REST Laravel</span>
+        </nav>
+    </section>
+    <section class="mt-2">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4 text-center">Welcome to API REST Laravel</h1>
+                <p class="lead text-center">You can find a lot of best practices and integration.</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+    <section>
+        <div class="text-center">
+            <a href="#" class="badge badge-success">Please check API health</a>
+        </div>
+    </section>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
