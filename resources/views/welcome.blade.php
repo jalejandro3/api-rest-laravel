@@ -24,8 +24,8 @@
         </div>
     </section>
     <section>
-        <div class="text-center">
-            <a href="#" class="badge badge-success">Please check API health</a>
+        <div class="text-left">
+            <a href="https://documenter.getpostman.com/view/1142154/Szzn7wip?version=latest">API Documentation (Postman)</a>
         </div>
     </section>
 </div>
