@@ -14,4 +14,4 @@ This is an API REST using Laravel 7 that brings information about
 5. Heroku (app host)
 6. Postman (to generate the API documentation)
 
-You can find all the documentation generated with Postman in https://arl-hcci.herokuapp.com/.
+You can find all the documentation generated with Postman in https://documenter.getpostman.com/view/1142154/Szzn7wip?version=latest.
