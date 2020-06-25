@@ -1,4 +1,4 @@
-#API REST Laravel
+# API REST Laravel
 
 This is an API REST using Laravel 7 that brings information about
 1. Users
@@ -6,7 +6,7 @@ This is an API REST using Laravel 7 that brings information about
 3. User Tasks
 4. Task Transactions
 
-##Technologies
+## Technologies
 1. PHP 7.4
 2. JWT (to generate an authorization user token)
 3. MySQL
